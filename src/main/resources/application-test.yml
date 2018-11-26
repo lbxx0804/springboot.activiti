@@ -1,0 +1,51 @@
+server:
+  port: 9999
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/activitydemo
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+  activiti:
+    database-schema-update: true
+    #    check-process-definitions: true
+    check-process-definitions: false
+    process-definition-location-prefix: classpath:/diagrams/
+    history-level: full
+    #    process-definition-location-suffixes:
+    #      - **.bpmn
+    #      - **.bpmn20.xml
+
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+    ddl-auto: update
+    naming:
+      physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    #        physical-strategy: org.hibernate.cfg.DefaultComponentSafeNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 102400Mb
+      max-request-size: 102400Mb
+
+logging:
+  file: log.log
+  pattern:
+    level: debug
+security:
+  basic:
+    enabled: false
