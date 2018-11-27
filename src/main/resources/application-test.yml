@@ -43,7 +43,6 @@ spring:
       max-request-size: 102400Mb
 
 logging:
-  file: log.log
   pattern:
     level: debug
 security:
