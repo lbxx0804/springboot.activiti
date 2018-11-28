@@ -1,17 +1,22 @@
 package com.zzlc.activitidemo.controller;
 
 
+import com.zzlc.activitidemo.RestResponseModel;
 import com.zzlc.activitidemo.service.ModelerService;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
+import org.activiti.engine.task.Task;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 public class ModelerController {
@@ -19,6 +24,12 @@ public class ModelerController {
 
     @Resource
     private ModelerService modelerService;
+
+    @Autowired
+    private RuntimeService runtimeService;
+
+    @Autowired
+    private TaskService taskService;
 
 
     /**
@@ -68,7 +79,26 @@ public class ModelerController {
     }
 
     @RequestMapping("/start")
+    @ResponseBody
     public String start(String defKey){
-        return null;
+        runtimeService.startProcessInstanceByKey(defKey);
+        return "ok";
+    }
+
+    @RequestMapping("/findTask")
+    @ResponseBody
+    public String findTask(String userName) {
+        List<Task> taskList = taskService.createTaskQuery().taskAssignee(userName).list();
+        for (Task task : taskList) {
+            System.out.println(task.getId());
+        }
+        return "ok";
+    }
+
+    @RequestMapping("completeTask")
+    @ResponseBody
+    public String completeTask(String taskId) {
+        taskService.complete(taskId);
+        return "ok";
     }
 }
