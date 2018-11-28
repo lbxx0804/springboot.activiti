@@ -10,6 +10,7 @@ spring:
 
   activiti:
     database-schema-update: true
+    #drop-create
     #    check-process-definitions: true
     check-process-definitions: false
     process-definition-location-prefix: classpath:/diagrams/
@@ -43,7 +44,6 @@ spring:
       max-request-size: 102400Mb
 
 logging:
-  file: log.log
   pattern:
     level: debug
 security:

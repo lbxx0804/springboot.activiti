@@ -20,4 +20,10 @@ public interface ModelerService {
      * @return
      */
     List<Model> queryModelList();
+
+    /**
+     * 部署
+     * @param modelId
+     */
+    void deploy(String modelId) throws Exception;
 }
