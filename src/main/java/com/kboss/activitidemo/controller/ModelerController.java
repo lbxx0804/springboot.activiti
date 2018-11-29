@@ -1,8 +1,7 @@
-package com.zzlc.activitidemo.controller;
+package com.kboss.activitidemo.controller;
 
 
-import com.zzlc.activitidemo.RestResponseModel;
-import com.zzlc.activitidemo.service.ModelerService;
+import com.kboss.activitidemo.service.ModelerService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.task.Task;
@@ -78,27 +77,5 @@ public class ModelerController {
         return "ok";
     }
 
-    @RequestMapping("/start")
-    @ResponseBody
-    public String start(String defKey){
-        runtimeService.startProcessInstanceByKey(defKey);
-        return "ok";
-    }
 
-    @RequestMapping("/findTask")
-    @ResponseBody
-    public String findTask(String userName) {
-        List<Task> taskList = taskService.createTaskQuery().taskAssignee(userName).list();
-        for (Task task : taskList) {
-            System.out.println(task.getId());
-        }
-        return "ok";
-    }
-
-    @RequestMapping("completeTask")
-    @ResponseBody
-    public String completeTask(String taskId) {
-        taskService.complete(taskId);
-        return "ok";
-    }
 }

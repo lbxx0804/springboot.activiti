@@ -1,4 +1,4 @@
-package com.zzlc.activitidemo.config;
+package com.kboss.activitidemo.config;
 
 import org.activiti.spring.SpringProcessEngineConfiguration;
 import org.activiti.spring.boot.ProcessEngineConfigurationConfigurer;

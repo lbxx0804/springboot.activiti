@@ -1,4 +1,4 @@
-package com.zzlc.activitidemo;
+package com.kboss.activitidemo;
 
 public class RestResponseModel<T> {
     private T data;

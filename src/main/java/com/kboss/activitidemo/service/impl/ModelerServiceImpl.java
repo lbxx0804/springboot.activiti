@@ -1,9 +1,9 @@
-package com.zzlc.activitidemo.service.impl;
+package com.kboss.activitidemo.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.zzlc.activitidemo.service.ModelerService;
+import com.kboss.activitidemo.service.ModelerService;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;

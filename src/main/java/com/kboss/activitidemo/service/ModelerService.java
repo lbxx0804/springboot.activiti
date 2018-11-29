@@ -1,4 +1,4 @@
-package com.zzlc.activitidemo.service;
+package com.kboss.activitidemo.service;
 
 import org.activiti.engine.repository.Model;
 
