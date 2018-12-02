@@ -49,3 +49,6 @@ logging:
 security:
   basic:
     enabled: false
+mybatis:
+  type-aliases-package: com.kboss.activitidemo.entity
+  mapper-locations: classpath:mapper/*.xml
