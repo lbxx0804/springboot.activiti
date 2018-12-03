@@ -1,5 +1,7 @@
 package com.kboss.activitidemo.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class PagedModelInVo {
 
     public PagedModelInVo() {
@@ -30,6 +32,7 @@ public class PagedModelInVo {
         this.pageSize = pageSize;
     }
 
+    @JsonIgnore
     public Integer getStartPage() {
         return (this.pageNumber - 1) * this.pageSize;
     }

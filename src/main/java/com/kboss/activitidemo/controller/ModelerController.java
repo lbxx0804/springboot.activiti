@@ -69,6 +69,7 @@ public class ModelerController {
      * @return
      */
     @RequestMapping("/list")
+    @ResponseBody
     public PageInfoOutVo<ActModelVo> modelList(ActModelVo actModelVo) {
         PageInfoOutVo<ActModelVo> result = modelerService.queryModelList(actModelVo);
         return result;
