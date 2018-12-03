@@ -2,6 +2,9 @@ package com.kboss.activitidemo.controller;
 
 
 import com.kboss.activitidemo.service.ModelerService;
+import com.kboss.activitidemo.vo.ActModelVo;
+import com.kboss.activitidemo.vo.PageInfoOutVo;
+import com.kboss.activitidemo.vo.PagedModelInVo;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.task.Task;
@@ -18,10 +21,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
+@RequestMapping("/model")
 public class ModelerController {
     private static final Logger logger = LoggerFactory.getLogger(ModelerController.class);
 
-    @Resource
+    @Autowired
     private ModelerService modelerService;
 
     @Autowired
@@ -61,14 +65,14 @@ public class ModelerController {
 
     /**
      * 模型列表
-     * @param modelAndView
+     * @param
      * @return
      */
-    /*@RequestMapping("/model/list")
-    public ModelAndView modelList(ModelAndView modelAndView) {
-        List<Model> list = modelerService.queryModelList();
-        return modelAndView;
-    }*/
+    @RequestMapping("/list")
+    public PageInfoOutVo<ActModelVo> modelList(ActModelVo actModelVo) {
+        PageInfoOutVo<ActModelVo> result = modelerService.queryModelList(actModelVo);
+        return result;
+    }
 
     @RequestMapping("/deploy")
     @ResponseBody

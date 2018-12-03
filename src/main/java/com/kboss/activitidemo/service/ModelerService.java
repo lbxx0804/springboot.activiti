@@ -1,5 +1,7 @@
 package com.kboss.activitidemo.service;
 
+import com.kboss.activitidemo.vo.ActModelVo;
+import com.kboss.activitidemo.vo.PageInfoOutVo;
 import org.activiti.engine.repository.Model;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public interface ModelerService {
      * 获取模型列表
      * @return
      */
-    List<Model> queryModelList();
+    PageInfoOutVo<ActModelVo> queryModelList(ActModelVo actModelVo);
 
     /**
      * 部署

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kboss.activitidemo.service.ModelerService;
+import com.kboss.activitidemo.vo.ActModelVo;
+import com.kboss.activitidemo.vo.PageInfoOutVo;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
@@ -12,12 +14,15 @@ import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
+import org.activiti.engine.repository.ModelQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -74,9 +79,28 @@ public class ModelerServiceImpl implements ModelerService {
      * @return
      */
     @Override
-    public List<Model> queryModelList() {
-        List<Model> list = repositoryService.createModelQuery().list();
-        return list;
+    public PageInfoOutVo<ActModelVo> queryModelList(ActModelVo actModelVo) {
+        ModelQuery modelQuery = repositoryService.createModelQuery();
+        if (actModelVo.getName() != null && !actModelVo.getName().isEmpty()) {
+            modelQuery = modelQuery.modelNameLike("%" + actModelVo.getName() + "%");
+        }
+        if (actModelVo.getKey() != null && !actModelVo.getKey().isEmpty()) {
+            modelQuery = modelQuery.modelKey(actModelVo.getKey());
+        }
+        PageInfoOutVo<ActModelVo> result = new PageInfoOutVo<ActModelVo>();
+        result.setTotal((int) modelQuery.count());
+        List<Model> modelList = modelQuery.listPage(actModelVo.getStartPage(), actModelVo.getPageSize());
+        List<ActModelVo> actModelVoList = new ArrayList<ActModelVo>(modelList.size());
+        for (Model model : modelList) {
+            ActModelVo actModelVoResult = new ActModelVo();
+            BeanUtils.copyProperties(model, actModelVo);
+            actModelVoList.add(actModelVoResult);
+        }
+        result.setResult(actModelVoList);
+        return result;
+        //List<Model> list = repositoryService.createModelQuery().list();
+
+        //return list;
     }
 
     /**
